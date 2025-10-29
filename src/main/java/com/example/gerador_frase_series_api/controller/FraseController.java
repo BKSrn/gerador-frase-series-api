@@ -1,5 +1,6 @@
 package com.example.gerador_frase_series_api.controller;
 
+import com.example.gerador_frase_series_api.dto.FraseDTO;
 import com.example.gerador_frase_series_api.model.Frase;
 import com.example.gerador_frase_series_api.service.FraseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ public class FraseController {
     FraseService fraseService;
 
     @GetMapping("/series/frases")
-    public Frase buscarFrase(){
+    public FraseDTO buscarFrase(){
         return fraseService.buscarFraseAleatoria();
     }
 }
