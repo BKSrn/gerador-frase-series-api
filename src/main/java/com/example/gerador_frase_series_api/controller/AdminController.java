@@ -14,8 +14,6 @@ public class AdminController {
 
     @PostMapping("/popular-banco")
     public String popularBanco() {
-        // Limpar dados anteriores (opcional)
-        fraseRepository.deleteAll();
 
         // Inserir frases
         fraseRepository.save(new Frase("Breaking Bad", "I am the one who knocks!", "Walter White", "https://images.unsplash.com/photo-1574267432644-f737ae2d8c5f?w=300"));
