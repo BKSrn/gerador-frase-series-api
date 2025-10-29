@@ -4,7 +4,9 @@ import com.example.gerador_frase_series_api.dto.FraseDTO;
 import com.example.gerador_frase_series_api.model.Frase;
 import com.example.gerador_frase_series_api.repository.FraseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +18,11 @@ public class FraseService {
 
     public FraseDTO buscarFraseAleatoria(){
         Frase frase = fraseRepository.buscarFraseAleatoria();
+        if (frase != null) {
+            return new FraseDTO(frase.getTitulo(), frase.getFrase(), frase.getPersonagem(), frase.getPoster());
+        }
 
-        return new FraseDTO(frase.getTitulo(), frase.getFrase(), frase.getPersonagem(), frase.getPoster());
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhuma frase encontrada no banco de dados");
     }
 
     public List<FraseDTO> buscarTodasFrases() {
